@@ -1,4 +1,4 @@
-<h1>Moose Analytics v1.0.1 1640 Data-Format Version</h1>
+<h1>Moose Analytics v1.0.4 1640 Data-Format Version</h1>
 <h4>Graphical Update and Major Launch - 3.6.2019</h4>
 <hr>
 A webapp created with R Shiny to show graphs and different data analytic function.
@@ -18,11 +18,6 @@ https://mooseanalytics.shinyapps.io/webapp/
 <code>ggplot2</code><br>
 <code>fmsb</code><br>
 <code>tibble</code><br>
-
-
-<br>
-Reading 1640_FormattedData.csv
-
 
 
 
