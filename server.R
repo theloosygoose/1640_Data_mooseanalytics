@@ -103,7 +103,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
   ###################
 
   #Taking Means of Total Cargo
- summary_df <- round(aggregate(cbind(df$Hatch_total, df$Cargo_total, df$Efficient_Placing , df$Level_Ended), by=list(Category=df$Team), FUN=mean), digits = 2)
+ summary_df <- round(aggregate(cbind(df$Hatch_total, df$Cargo_total, df$Efficient_Placing , df$Level_Ended), by=list(Category=df$Team), FUN=mean), digits = 3)
 
   #Making summary_df for EVENT TAB AND TEAM TAB
  names(summary_df) <- c("Team", "Hatch_Avg", "Cargo_Avg", "Efficient_Placing", "Level_Ended")
@@ -111,9 +111,10 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
 
 ## Team Summary More Df ##
 
-  team_summary_df <- aggregate(cbind(df$Hatch_total, df$Cargo_total, df$Hatch_high_total, df$Cargo_high_total, df$Cargo_med_total, df$Hatch_med_total), by=list(Category=df$Team), FUN=sum)
 
-  names(team_summary_df) <- c("Team", "Hatch_Sum", "Cargo_Sum", "Hatch_High", "Cargo_High", "Hatch_Med", "Cargo_Med", "Hatch_Med")
+  team_summary_df <- aggregate(cbind(df$Hatch_total, df$Cargo_total, df$rocket_Lev_3_hatch, df$rocket_Lev_3_cargo, df$rocket_Lev_2_hatch, df$rocket_Lev_2_cargo), by=list(Category=df$Team), FUN=sum)
+
+  names(team_summary_df) <- c("Team", "Hatch_Sum", "Cargo_Sum", "Hatch_High", "Cargo_High", "Hatch_Med", "Cargo_Med")
 
 
 
@@ -319,6 +320,39 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
 
   })
 
+  ####################
+## TEAM LEVLES OUTPUTs ##
+  ####################
+
+  output$robot_cargo_high <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Cargo_High
+  })
+
+  output$robot_cargo_med <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Cargo_Med
+  })
+  
+  output$robot_hatch_high <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Hatch_High
+  })
+
+  output$robot_hatch_med <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Hatch_Med
+  })
+
+    output$robot_cargo_sum <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Cargo_Sum
+  })
+  
+  output$robot_hatch_sum <- renderText({
+    newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
+    newdf$Hatch_Sum
+  })
 
   ####################
 ## EVENT SUMMARY TAB ##

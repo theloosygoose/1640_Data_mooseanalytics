@@ -25,9 +25,27 @@ ui <- fluidPage(theme = "main.css",
         ),
         column(6,
           plotOutput("robot_skills_radar", width ='500px')
+        )
+      ),
+      fluidRow(
+        column(3,
+          tags$h2('Hatch High Total'),
+          tags$h2(textOutput('robot_hatch_high'))
         ),
-        column(6
 
+        column(3,
+          tags$h2('Hatch Med Total'),
+          tags$h2(textOutput('robot_hatch_med'))
+        ),   
+
+        column(3,
+          tags$h2('Cargo High Total'),
+          tags$h2(textOutput('robot_cargo_high'))
+        ),
+
+        column(3,
+          tags$h2('Cargo Med Total'),
+          tags$h2(textOutput('robot_cargo_med'))
         )
       )
     ),
