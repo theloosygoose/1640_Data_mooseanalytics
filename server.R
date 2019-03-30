@@ -90,6 +90,7 @@ df_1640$Cargo_total <- df_1640$total_CS_cargo + df_1640$rocket_Lev_3_cargo + df_
 
 
 
+
 df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Location","Piece_Holding", "SS_rocket_Lev_3_cargo", "SS_rocket_Lev_2_cargo", "SS_rocket_Lev_1_cargo", "SS_rocket_Lev_3_hatch", "SS_rocket_Lev_2_hatch", "SS_rocket_Lev_1_hatch", "SS_total_rocket_hatch", "SS_total_rocket_cargo", "SS_total_CS_cargo", "SS_total_CS_hatch",
                                  "rocket_Lev_3_hatch", "rocket_Lev_2_hatch", "rocket_Lev_1_hatch", "rocket_Lev_3_cargo", "rocket_Lev_2_cargo", "rocket_Lev_1_cargo",
                                  "total_rocket_hatch", "total_rocket_cargo", "total_CS_hatch", "total_CS_cargo", "Hatch_total", "Cargo_total",
@@ -97,14 +98,24 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
 ))
 
 
- #team_summary_df <- round(aggregate(cbind(df$Hatch_total, df$Cargo_total))
-
+  ####################
+## MAKING DATAFRAMES ##
+  ###################
 
   #Taking Means of Total Cargo
  summary_df <- round(aggregate(cbind(df$Hatch_total, df$Cargo_total, df$Efficient_Placing , df$Level_Ended), by=list(Category=df$Team), FUN=mean), digits = 2)
 
   #Making summary_df for EVENT TAB AND TEAM TAB
  names(summary_df) <- c("Team", "Hatch_Avg", "Cargo_Avg", "Efficient_Placing", "Level_Ended")
+
+
+## Team Summary More Df ##
+
+  team_summary_df <- aggregate(cbind(df$Hatch_total, df$Cargo_total, df$Hatch_high_total, df$Cargo_high_total, df$Cargo_med_total, df$Hatch_med_total), by=list(Category=df$Team), FUN=sum)
+
+  names(team_summary_df) <- c("Team", "Hatch_Sum", "Cargo_Sum", "Hatch_High", "Cargo_High", "Hatch_Med", "Cargo_Med", "Hatch_Med")
+
+
 
 
  ################################
