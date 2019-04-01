@@ -27,6 +27,21 @@ ui <- fluidPage(theme = "main.css",
           plotOutput("robot_skills_radar", width ='500px')
         )
       ),
+
+      fluidRow(
+        column(6,
+        tags$div(class = "sumheader",
+          tags$h1("Hatch Sum"),
+          tags$h1(textOutput('robot_hatch_sum'))
+        )
+        ),
+        column(6,
+        tags$div(class = "sumheader",
+          tags$h1("Cargo Sum"),
+          tags$h1(textOutput("robot_cargo_sum"))
+        )
+        )
+      ),
       fluidRow(
         column(3,
           tags$h2('Hatch High Total'),
@@ -47,6 +62,7 @@ ui <- fluidPage(theme = "main.css",
           tags$h2('Cargo Med Total'),
           tags$h2(textOutput('robot_cargo_med'))
         )
+
       )
     ),
 
@@ -197,6 +213,9 @@ ui <- fluidPage(theme = "main.css",
           ),
           column(12,
             plotOutput("event_skill_summary_plot", height = 700)
+          ),
+          column(12,
+            DTOutput("total_table")
           )
         )
       ),

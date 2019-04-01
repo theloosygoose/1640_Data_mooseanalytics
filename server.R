@@ -133,7 +133,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
 
 ##Server-side for DEFENCE RANK AND SCORE
   output$defence_Text <- renderPrint({
-    df[grep(input$robot_numSearch, df$Team),c(1,34)]
+    df[grep(input$robot_numSearch, df$Team),c(1,32)]
   })
 ##Server-side for ENDING POINT
   output$endpoint_Text <- renderPrint({
@@ -166,7 +166,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
         output$A_cargoShip_Cargo_Line <- renderPlot({
           plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,14)]
           plotdata$Match <- as.character(plotdata$Match)
-          ggplot(data = plotdata, aes(x=Match, y=SS_total_CS_cargo)) + geom_bar(stat="identity") + ylim(0,3)
+          ggplot(data = plotdata, aes(x=Match, y=SS_total_CS_cargo)) +  ylim(0,3)
         })
 
 ##Server-side for Sandstrom #Hatches on CargoShip w/ match Number
@@ -177,7 +177,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
         output$A_cargoShip_Hatch_Line <- renderPlot({
           plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,15)]
           plotdata$Match <- as.character(plotdata$Match)
-          ggplot(data = plotdata, aes(x=Match, y=SS_total_CS_hatch)) + geom_bar(stat="identity")  + ylim(0,3)
+          ggplot(data = plotdata, aes(x=Match, y=SS_total_CS_hatch)) + geom_line()  + ylim(0,3)
         })
 
 ##TOTAL ROCKET HATCH
@@ -198,8 +198,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
         #PLOT
         output$rocket_Cargo_Plot_total <- renderPlot({
           plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,23)]
-          plotdata$Match <- as.character(plotdata$Match)
-          ggplot(data = plotdata, aes(x=Match, y=total_rocket_cargo)) + geom_bar(stat="identity") + ylim(0,6)
+          ggplot(data = plotdata, aes(x=Match, y=total_rocket_cargo, group = 1)) +  geom_point() + ylim(0,6) + theme(panel.border = element_blank(), panel.grid = element_blank()) + geom_smooth(method = "lm", se = FALSE)
         })
 
   #HATCH
@@ -210,8 +209,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
         #PLOT
         output$rocket_Hatch_Plot_total <- renderPlot({
           plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,22)]
-          plotdata$Match <- as.character(plotdata$Match)
-          ggplot(data = plotdata, aes(x=Match, y=total_rocket_hatch)) + geom_bar(stat="identity") + ylim(0,6)
+          ggplot(data = plotdata, aes(x=Match, y=total_rocket_hatch, group = 1)) +  geom_point() + ylim(0,6) + theme(panel.border = element_blank(), panel.grid = element_blank()) +geom_smooth(method = "lm", se = FALSE)
         })
 
 ##Server-side for TOTAL CARGO SHIP DATA w/ match Number
@@ -222,8 +220,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
       #PLOT
       output$cargoship_Hatch_Plot_total <- renderPlot({
         plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,24)]
-        plotdata$Match <- as.character(plotdata$Match)
-        ggplot(data = plotdata, aes(x=Match, y=total_CS_hatch)) + geom_bar(stat="identity") + ylim(0,6)
+        ggplot(data = plotdata, aes(x=Match, y=total_CS_hatch, group = 1)) + geom_point() + ylim(0,6) + theme(panel.border = element_blank(), panel.grid = element_blank()) + geom_smooth(method = "lm", se = FALSE)
       })
   #CARGO 21
   output$cargoship_Cargo_Text_total <- renderPrint({
@@ -232,8 +229,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
       #PLOT
       output$cargoship_Cargo_Plot_total <- renderPlot({
         plotdata <- df[grep(input$robot_numSearch, df$Team),c(1,25)]
-        plotdata$Match <- as.character(plotdata$Match)
-        ggplot(data = plotdata, aes(x=Match, y=total_CS_cargo)) + geom_bar(stat="identity") + ylim(0,6)
+        ggplot(data = plotdata, aes(x=Match, y=total_CS_cargo, group = 1)) + geom_point()  + ylim(0,6) + theme(panel.border = element_blank(), panel.grid = element_blank()) +  geom_smooth(method = "lm", se = FALSE)
       })
 
   #################
@@ -283,7 +279,7 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
     newdf <- summary_df[grep(input$robot_numSearch, summary_df$Team),]
     newdf$Team <- NULL
     newdf <- rbind(c(0,0,0,0), newdf)
-    newdf <- rbind(c(8,8,5,3), newdf)
+    newdf <- rbind(c(5,5,5,3), newdf)
     radarchart(newdf, axistype = 2,
                pcol='brown3', pfcol='brown3', plwd = 3,
                cglcol="grey", cglty=1, axislabcol="grey", cglwd=2)
@@ -352,6 +348,10 @@ df <- subset(df_1640, select = c("Match", "Scout_Initials", "Team", "Starting_Lo
   output$robot_hatch_sum <- renderText({
     newdf <- team_summary_df[grep(input$robot_numSearch, team_summary_df$Team),]
     newdf$Hatch_Sum
+  })
+
+  output$total_table <- renderDT({
+    team_summary_df
   })
 
   ####################
