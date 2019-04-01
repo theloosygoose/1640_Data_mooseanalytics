@@ -11,13 +11,8 @@ https://mooseanalytics.shinyapps.io/webapp/
 
 ![Alt Text](demo.gif)
 <br>
-<b>PACKAGES</b><br>
-<code>shiny</code><br>
-<code>dplyr</code><br>
-<code>DT</code><br>
-<code>ggplot2</code><br>
-<code>fmsb</code><br>
-<code>tibble</code><br>
+
+Includes python script to convert csv headers to something that R can read and interpret.
 
 
 
