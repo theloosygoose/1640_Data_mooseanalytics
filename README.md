@@ -1,5 +1,5 @@
 <h1>Moose Analytics v1.2 1640 Data-Format Version</h1>
-<h4>Team Totals Update - 4.1.2019</h4>
+<h2>Team Totals Update - 4.1.2019</h2>
 <hr>
 A webapp created with R Shiny to show graphs and different data analytic function.
 Main app is coded in R in the ui.R file and the server.R files
